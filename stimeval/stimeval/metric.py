@@ -1,24 +1,25 @@
 import numpy as np
 
 def pixcorr(x, y, var='row'):
-    shape = x.shape
-    x_flat = x.reshape(shape[0], -1)
-    y_flat = y.reshape(shape[0], -1)
-    if var == 'col':
-        x_flat = x_flat.T
-        y_flat = y_flat.T
-
-    nvar = x_flat.shape[0]
-    rmat = np.corrcoef(x_flat, y_flat, rowvar=1)
-
-    r = np.diag(rmat[:nvar, nvar:])
-    return r
+    
+    raise NotImplementedError
 
 def rms(x,y):
+    diff_squared = (x - y)**2
+    return np.mean(np.sqrt(diff_squared))
+    
+
     raise NotImplementedError
 
 def pixcorrME(x, y , ME_param=None):
     raise NotImplementedError
 
 def rmsME(x,y, ME_param=None):
-    raise Not
+    raise NotImplementedError
+
+
+
+if __name__ == '__main__':
+    rand_img = np.random.rand(1, 224,224, 3)
+
+    print(rms(rand_img, rand_img))

@@ -1,7 +1,7 @@
-# video_evaluation
+# stim_eval: python package for evaluating the reconstructed/decoded image[video, other domin] with targets.
 [Example (the goal)]
 
-eval = VideoEval(name  = 'pixel correlation')
+eval = StimEval(name  = 'pixel correlation')
 
-score = eval(true_vid, recon_vid) #both shape should be (batch, fr, height, width, channel).
+score = eval(true_stim, recon_stim) #both shape should be (batch, stim_shape).
 

@@ -1,15 +1,15 @@
 """
 StimEval class
 """
+import numpy as np
 from .metric import *
 metric_dict = {
     'pixel correlation' : pixcorr,
     'root mean square': rms,
     'ME pix corr': pixcorrME,
-    'MotionNet pix corr': pixcorrMN
 }
 
-class Stimval():
+class StimEval():
     """ StimEval class
     Parameters
     ----------
@@ -18,9 +18,9 @@ class Stimval():
 
     """
 
-    def __init__(sefl, metric='pixel correlation'):
+    def __init__(self, metric='pixel correlation'):
         try:
-            self.metric = metirc_dict[metric]
+            self.metric = metric_dict[metric]
         except KeyError as e:
             print(metric + ' is not implemented yet' + e)
 
@@ -41,3 +41,5 @@ class Stimval():
         except:
             print('The shape is not matched between inputs')
         return self.metric(true_stim, recon_stim)
+
+

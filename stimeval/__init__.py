@@ -8,4 +8,4 @@ Developed by Ken Shirakawa, Kamitani lab, Kyoto Univ.
 # package `util`.
 
 from .stimeval import StimEval
-from .util import * 
+from .utils import * 
