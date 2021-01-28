@@ -5,7 +5,7 @@ Developed by Ken Shirakawa, Kamitani lab, Kyoto Univ.
 """
 
 #'import veval implicitly imports class `VidEval` (and package `VidEval`) and 
-# package `util`.
+# package `utils`.
 
-from .stimeval import StimEval
+from .stimeval import *
 from .utils import * 
