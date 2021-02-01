@@ -7,11 +7,13 @@ StimEval class
 """
 import numpy as np
 from .metric import *
+from .metric_ME import *
 metric_dict = {
     'profile correlation' : pixcorr,
     'spatial correlation' : pixcorr,
     'squared error': squarederror,
     'pairwise identification': pairwise_identification,
+    'ME profile correlation': profile_correlation_ME
 }
 
 opts_dict= {'spatial correlation': {'var': 'row'}}

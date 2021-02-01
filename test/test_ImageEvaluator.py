@@ -65,7 +65,7 @@ class TestImageEvaluator(unittest.TestCase):
         # evaluate true image and recon image
         #val = eval(true_img_list_min, recon_img_list_min)
         val = eval(recon_img_list,true_img_list ,)
-        self.assertEqual(len(val), 224 * 224*  3)
+        self.assertEqual(val.shape, (224,224,3))
 
     def test_spatial_corr_actual_image(self):
         """Test profile correlation evaluation for true and reconstructed image

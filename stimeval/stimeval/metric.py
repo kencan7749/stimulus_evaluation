@@ -10,7 +10,19 @@ import numpy as np
 from numpy.matlib import repmat
 from tqdm import tqdm
 
+def squarederror(x,y):
+    """Calculate squared error
 
+    Args:
+        x (np.array): target (decoded/recon) values [batch_size, *shape]
+        y (np.array): soruce (true) values [batch_size, *shape]
+
+
+    Returns:
+        np.array: (x - y) ** 2 
+    """
+    diff_squared = (x - y)**2
+    return np.sqrt(diff_squared)
 
 def pixcorr(x, y, var='col'):
     """[summary]
@@ -26,6 +38,7 @@ def pixcorr(x, y, var='col'):
     """
     
     batch_size = x.shape[0]
+    stim_shape = x.shape[1:]
     x_flat = x.reshape(batch_size, -1)
     y_flat = y.reshape(batch_size, -1)
     # Normalize x and y to row-var format
@@ -57,7 +70,10 @@ def pixcorr(x, y, var='col'):
     #Get Correlation for each row for avoding memory error
     r = np.array([np.corrcoef(x_flat[i].flatten(), y_flat[i].flatten())[0,1] for i in tqdm(range(nvar))])
     
-    return r
+    if var == 'col':
+        return r.reshape(stim_shape)
+    else:
+        return r
 
 def pairwise_identification(x,y):
     """[summary]
@@ -110,25 +126,6 @@ def corrmat(x,y, var='row'):
     cmat = (np.dot(submean(x), submean(y).T) / (nobs - 1)) / np.dot(np.matrix(np.std(x, axis=1, ddof=1)).T, np.matrix(np.std(y, axis=1, ddof=1)))
     
     return np.array(cmat)
-
-
-
-
-    
-
-def squarederror(x,y):
-    """Calculate squared error
-
-    Args:
-        x (np.array): target (decoded/recon) values [batch_size, *shape]
-        y (np.array): soruce (true) values [batch_size, *shape]
-
-
-    Returns:
-        np.array: (x - y) ** 2 
-    """
-    diff_squared = (x - y)**2
-    return np.sqrt(diff_squared)
     
 
 if __name__ == '__main__':
