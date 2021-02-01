@@ -53,19 +53,37 @@ class TestImageEvaluator(unittest.TestCase):
         # Set evaluatator
         eval = ImageEvaluator(img_metric='squared error')
         # evaluate true image and recon image
-        val = eval(true_img_list, recon_img_list)
+        val = eval(recon_img_list,true_img_list)
 
         self.assertEqual(len(val), len(true_img_file_names))
         
 
-    def test_corr_actual_image(self):
+    def test_profile_corr_actual_image(self):
         """Test profile correlation evaluation for true and reconstructed image
         """
-        eval = ImageEvaluator(img_metric='pixel correlation')
+        eval = ImageEvaluator(img_metric='profile correlation')
         # evaluate true image and recon image
-        val = eval(true_img_list_min, recon_img_list_min)
-        
-        self.assertEqual(len(val), 32 * 32 * 3)
+        #val = eval(true_img_list_min, recon_img_list_min)
+        val = eval(recon_img_list,true_img_list ,)
+        self.assertEqual(len(val), 224 * 224*  3)
+
+    def test_spatial_corr_actual_image(self):
+        """Test profile correlation evaluation for true and reconstructed image
+        """
+        eval = ImageEvaluator(img_metric='spatial correlation')
+        # evaluate true image and recon image
+        #val = eval(true_img_list_min, recon_img_list_min)
+        val = eval(recon_img_list,true_img_list )
+        self.assertEqual(len(val), len(true_img_list))
+
+    def test_pariwise_identification(self):
+        """Test identification analysis for true and reconstructed image
+        """
+        eval = ImageEvaluator(img_metric='pairwise identification')
+        # evaluate true image and recon image
+        #val = eval(true_img_list_min, recon_img_list_min)
+        val = eval(recon_img_list,true_img_list )
+        self.assertEqual(len(val), len(true_img_list))
 
 
 

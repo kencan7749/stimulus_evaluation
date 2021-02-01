@@ -45,7 +45,7 @@ class TestVideoEvaluator(unittest.TestCase):
         # Set evaluatator
         eval = VideoEvaluator(vid_metric='squared error')
         # evaluate true image and recon image
-        val = eval(true_vid_list, recon_vid_list)
+        val = eval(recon_vid_list,true_vid_list)
 
         self.assertEqual(len(val), len(true_vid_file_names))
         
@@ -53,11 +53,11 @@ class TestVideoEvaluator(unittest.TestCase):
     def test_corr_actual_video(self):
         """Test profile correlation evaluation for true and reconstructed image
         """
-        eval = VideoEvaluator(vid_metric='pixel correlation')
+        eval = VideoEvaluator(vid_metric='profile correlation')
         # evaluate true image and recon image
-        val = eval(true_vid_list_min, recon_vid_list_min)
+        val = eval(recon_vid_list,true_vid_list)
         
-        self.assertEqual(len(val), 32 * 32 * 3)
+        self.assertEqual(len(val), 11 * 224 * 224 * 3)
 
 
 

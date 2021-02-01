@@ -8,16 +8,19 @@ StimEval class
 import numpy as np
 from .metric import *
 metric_dict = {
-    'pixel correlation' : pixcorr,
+    'profile correlation' : pixcorr,
+    'spatial correlation' : pixcorr,
     'squared error': squarederror,
-    'ME pix corr': pixcorrME,
+    'pairwise identification': pairwise_identification,
 }
+
+opts_dict= {'spatial correlation': {'var': 'row'}}
 
 class StimEvaluater():
     """ Abstract 'stim evaluator class common for all types of stim evaluators/
 
     """
-    def __init__(self, metric, opt_dict=None):
+    def __init__(self, metric, **opts):
         """ Initialize evaluator class
 
         Args:
@@ -25,7 +28,11 @@ class StimEvaluater():
             opt_dict (dict): optional dict for calculate metrics (this will be not well written)
         """
         self.metric = metric_dict[metric]
-        self.opt_dict = opt_dict
+        self.opts = opts
+        # select option if opts (dict) is empty
+        if len(self.opts)==0 and metric in opts_dict:
+            self.opts = opts_dict[metric]
+        
         
     def calc_metric(self, true_stim, recon_stim):
         """[summary]
@@ -48,9 +55,9 @@ class StimEvaluater():
         except:
             raise('The shape is not matched between inputs')
 
-        batch_size = true_stim.shape[0]
+
         #return the caluculated values for every sample
-        calculated_list = self.metric(true_stim, recon_stim)
+        calculated_list = self.metric(true_stim, recon_stim, **self.opts)
         #print(np.mean(calculated_list))
         return calculated_list
    
@@ -108,7 +115,7 @@ class FeatEvaluator(StimEvaluater):
         super().__init__(img_metric)
 
     def __call__(self, true_feat, decoded_feat):
-        super().__call__(true_feat, decoded_feat)
+        return super().__call__(true_feat, decoded_feat)
 
 class VideoEvaluator(StimEvaluater):
     """ calculate specified metric between two input videos
