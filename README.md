@@ -1,4 +1,4 @@
-# stim_eval: python package for evaluating the reconstructed/decoded image[video, other domain] with targets.
+# stimeval: python package for evaluating the reconstructed/decoded image[video, other domain] with targets.
 [Example (the goal)]
 ```
 from stimeval import FeatEvaluator, ImageEvaluator, VideoEvaluator
