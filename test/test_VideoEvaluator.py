@@ -47,7 +47,7 @@ class TestVideoEvaluator(unittest.TestCase):
         # evaluate true image and recon image
         val = eval(recon_vid_list,true_vid_list)
         print(val.shape)
-        self.assertEqual(len(val.shape), len(true_vid_file_names))
+        self.assertEqual(val.shape[0], len(true_vid_file_names))
         
 
     def test_corr_actual_video(self):
@@ -56,8 +56,19 @@ class TestVideoEvaluator(unittest.TestCase):
         eval = VideoEvaluator(vid_metric='profile correlation')
         # evaluate true image and recon image
         val = eval(recon_vid_list,true_vid_list)
+        print(np.mean(val))
         
         self.assertEqual(val.shape, (11, 224, 224, 3))
+
+    def test_pariwise_identification(self):
+        """Test identification analysis for true and reconstructed image
+        """
+        eval = VideoEvaluator(vid_metric='pairwise identification')
+        # evaluate true image and recon image
+        val = eval(recon_vid_list,true_vid_list)
+        print(val)
+        
+        self.assertEqual(val.shape, len(true_vid_list))
 
     def test_corr_actual_video(self):
         """Test profile correlation evaluation for true and reconstructed image

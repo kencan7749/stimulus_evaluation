@@ -97,7 +97,7 @@ def pairwise_identification(x,y):
         correct_feat = pred_feat[label]
         pred_num = len(pred_feat) - 1
         correct_rate.append((pred_num - np.sum(pred_feat > correct_feat)) / pred_num)
-    return correct_rate
+    return np.array(correct_rate)
 
 def corrmat(x,y, var='row'):
     """[summary]
