@@ -33,5 +33,5 @@ Confirm in python3
 
 # Plan
 
-- Evaluate metric in feature space from image inputs
+- Evaluate metric in feature space (intermediate layer in pytorch model) from image inputs
 
