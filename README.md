@@ -7,7 +7,7 @@ from stimeval import FeatEvaluator, ImageEvaluator, VideoEvaluator
 true_img_arr = ... # np.array: shape (sample, height, width, channel (3))
 recin_img_arr = ... # np.array: shape (same as true_img_arr)
 
-evaluator = FeatEvaluator(metric = 'profile correlation') # like 'pairwise identification', 'squared error'...  
+evaluator = ImageEvaluator(metric = 'profile correlation') # like 'pairwise identification', 'squared error'...  
 # (see metric.py in detail)
 score = eval(recon_img_arr, true_img_arr) 
 score.shape 
