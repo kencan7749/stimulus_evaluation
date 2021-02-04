@@ -9,7 +9,7 @@ recin_img_arr = ... # np.array: shape (same as true_img_arr)
 
 evaluator = ImageEvaluator(metric = 'profile correlation') # like 'pairwise identification', 'squared error'...  
 # (see metric.py in detail)
-score = eval(recon_img_arr, true_img_arr) 
+score = evaluator(recon_img_arr, true_img_arr) 
 score.shape 
 (-> hetight * width * channel if 'profile correltion')
 (-> sample if 'pairwise identification')
@@ -20,7 +20,7 @@ decoded_feat_arr = ... # np.array: shape (same as true_stim_arr)
 
 evaluator = FeatEvaluator(metric = 'profile correlation') # like 'pairwise identification', 'squared error'...  
 # (see metric.py in detail)
-score = eval(decoded_feat_arr, true_feat_arr) 
+score = evaluator(decoded_feat_arr, true_feat_arr) 
 score.shape 
 (-> feat_shape if 'profile correltion')
 (-> sample if 'pairwise identification')
@@ -34,5 +34,5 @@ Confirm in python3
 # Plan
 
 - Evaluate metric in feature space (intermediate layer in pytorch model) from image inputs
-- Allow additional parameter in aruguments
+- Allow additional parameters in aruguments
 
