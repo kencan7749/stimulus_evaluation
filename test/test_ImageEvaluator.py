@@ -70,7 +70,7 @@ class TestImageEvaluator(unittest.TestCase):
     def test_spatial_corr_actual_image(self):
         """Test profile correlation evaluation for true and reconstructed image
         """
-        eval = ImageEvaluator(img_metric='spatial correlation')
+        eval = ImageEvaluator(img_metric='pattern correlation')
         # evaluate true image and recon image
         #val = eval(true_img_list_min, recon_img_list_min)
         val = eval(recon_img_list,true_img_list )

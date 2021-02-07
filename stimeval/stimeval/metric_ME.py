@@ -12,8 +12,8 @@ from .metric import *
 from .miscs.fastMotionEnergy.fastMotionEnergy import fastMotionEnergyModel
 from .miscs.fastMotionEnergy.preprocWavelets_grid_GetMetaParams import preprocWavelets_gird_GetMetaParams
 metric_dict = {
-    'profile correlation' : pixcorr,
-    'spatial correlation' : pixcorr,
+    'profile correlation' : corr,
+    'spatial correlation' : corr,
     'squared error': squarederror,
     'pairwise identification': pairwise_identification,
 }

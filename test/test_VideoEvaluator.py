@@ -68,7 +68,7 @@ class TestVideoEvaluator(unittest.TestCase):
         val = eval(recon_vid_list,true_vid_list)
         print(val)
         
-        self.assertEqual(val.shape, len(true_vid_list))
+        self.assertEqual(val.shape[0], len(true_vid_list))
 
     def test_corr_actual_video(self):
         """Test profile correlation evaluation for true and reconstructed image

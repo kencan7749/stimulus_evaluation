@@ -9,14 +9,14 @@ import numpy as np
 from .metric import *
 from .metric_ME import *
 metric_dict = {
-    'profile correlation' : pixcorr,
-    'spatial correlation' : pixcorr,
+    'profile correlation' : corr,
+    'pattern correlation' : corr,
     'squared error': squarederror,
     'pairwise identification': pairwise_identification,
     'ME profile correlation': profile_correlation_ME
 }
 
-opts_dict= {'spatial correlation': {'var': 'row'}}
+opts_dict= {'pattern correlation': {'var': 'row'}}
 
 class StimEvaluater():
     """ Abstract 'stim evaluator class common for all types of stim evaluators/

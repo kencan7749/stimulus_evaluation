@@ -24,7 +24,7 @@ def squarederror(x,y):
     diff_squared = (x - y)**2
     return np.sqrt(diff_squared)
 
-def pixcorr(x, y, var='col'):
+def corr(x, y, var='col'):
     """[summary]
 
     Args:
