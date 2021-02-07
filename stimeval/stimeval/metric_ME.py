@@ -13,12 +13,12 @@ from .miscs.fastMotionEnergy.fastMotionEnergy import fastMotionEnergyModel
 from .miscs.fastMotionEnergy.preprocWavelets_grid_GetMetaParams import preprocWavelets_gird_GetMetaParams
 metric_dict = {
     'profile correlation' : corr,
-    'spatial correlation' : corr,
+    'pattern correlation' : corr,
     'squared error': squarederror,
     'pairwise identification': pairwise_identification,
 }
 
-opts_dict= {'spatial correlation': {'var': 'row'}}
+opts_dict= {'pattern correlation': {'var': 'row'}}
 
 def rgb2gray(video):
     return video[0]*0.2989 + video[1] * 0.5870 + video[2] * 0.1140
