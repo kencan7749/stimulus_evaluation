@@ -36,12 +36,12 @@ class StimEvaluater():
             self.opts = opts_dict[metric]
         
         
-    def calc_metric(self, true_stim, recon_stim):
+    def calc_metric(self, recon_stim, true_stim):
         """[summary]
 
         Args:
-            true_stim ([type]): [description]
-            recon_stim ([type]): [description]
+            recon_stim (np.array): [description]
+            true_stim (np.array): [description]
 
         Returns:
             np.array (batch_size, *shape): the first element is the batch_size of the inputs
@@ -59,12 +59,12 @@ class StimEvaluater():
 
 
         #return the caluculated values for every sample
-        calculated_list = self.metric(true_stim, recon_stim, **self.opts)
+        calculated_list = self.metric(recon_stim,true_stim, **self.opts)
         #print(np.mean(calculated_list))
         return calculated_list
    
-    def __call__(self, true_stim, recon_stim):
-        calculated_list = self.calc_metric(true_stim, recon_stim)
+    def __call__(self, recon_stim, true_stim):
+        calculated_list = self.calc_metric(recon_stim, true_stim)
         return calculated_list
 
 
@@ -83,12 +83,12 @@ class ImageEvaluator(StimEvaluater):
     def __init__(self, img_metric='pixel correlation'):
         super().__init__(img_metric)
 
-    def __call__(self, true_img, recon_img):
+    def __call__(self, recon_img, true_img):
         """[summary]
 
         Args:
-            true_stim ([type]): [description]
-            recon_stim ([type]): [description]
+            recon_stim (np.array): [description]
+            true_stim (np.array): [description]
 
         Returns:
             np.array (batch_size, *shape): the first element is the batch_size of the inputs
@@ -97,9 +97,9 @@ class ImageEvaluator(StimEvaluater):
 
         #check image shape (bs, h, w, ch)
         
-        if len(true_img[0].shape) != 3:
+        if len(recon_img[0].shape) != 3:
             raise('The shape is not matched for image')
-        return super().calc_metric(true_img, recon_img)
+        return super().calc_metric(recon_img, true_img)
 
 
 class FeatEvaluator(StimEvaluater):
@@ -116,8 +116,8 @@ class FeatEvaluator(StimEvaluater):
     def __init__(self, img_metric='pixel correlation'):
         super().__init__(img_metric)
 
-    def __call__(self, true_feat, decoded_feat):
-        return super().__call__(true_feat, decoded_feat)
+    def __call__(self, decoded_feat, true_feat):
+        return super().__call__(decoded_feat,true_feat)
 
 class VideoEvaluator(StimEvaluater):
     """ calculate specified metric between two input videos
@@ -134,12 +134,12 @@ class VideoEvaluator(StimEvaluater):
     def __init__(self, vid_metric='pixel correlation'):
         super().__init__(vid_metric)
 
-    def __call__(self, true_vid, recon_vid):
+    def __call__(self, recon_vid, true_vid):
         """[summary]
 
         Args:
-            true_vid ([type]): [description]
-            recon_vid ([type]): [description]
+            recon_vid (np.array): [description]
+            true_vid (np.array): [description]
 
         Returns:
             np.array (batch_size, *shape): the first element is the batch_size of the inputs
@@ -150,5 +150,5 @@ class VideoEvaluator(StimEvaluater):
         
         if len(true_vid[0].shape) != 4:
             raise('The shape is not matched for video')
-        return super().__call__(true_vid, recon_vid)
+        return super().__call__(recon_vid, true_vid)
 

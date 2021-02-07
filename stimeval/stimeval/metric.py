@@ -4,6 +4,7 @@
 metric.py
     python function for evaluating x and y 
     The x and y must have the same shape, and the first dimension must be a batch size (sample).
+    Aim to push into bdpy
 """
 
 import numpy as np
